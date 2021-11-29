@@ -1,10 +1,12 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import counterReducer from '../features/counter/counterSlice';
+import { soundsApi } from '../features/MainView/main-view.service';
 
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
+    [soundsApi.reducerPath]: soundsApi.reducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(soundsApi.middleware),
 });
 
 export type AppDispatch = typeof store.dispatch;
