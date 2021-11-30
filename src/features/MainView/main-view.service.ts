@@ -12,6 +12,7 @@ export const soundsApi = createApi({
     getSound: build.query<Sound, string>({
       query: (id) => `sounds/${id}`,
       async onQueryStarted(id, { dispatch, queryFulfilled }) {
+        if(!id) return;
         // `onStart` side-effect
         // dispatch(messageCreated('Fetching post...'))
         try {
@@ -27,6 +28,12 @@ export const soundsApi = createApi({
     getSounds: build.query<SoundsResponse, void>({
         query: () => 'sounds',
       }),
+    updateSound: build.mutation<Sound, string>({
+      query: (id) => ({
+        url: `sounds/${id}/play`,
+        method: 'PUT',
+      }),
+    }),
   }),
 })
 // export const { useGetSound, useGetSounds } = api;

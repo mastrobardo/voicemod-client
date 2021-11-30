@@ -20,10 +20,25 @@ declare module '@mui/material/styles' {
 }
 
 const theme = createTheme({
+  typography: {
+    fontFamily: [
+      'Roboto',
+    ].join(','),
+  },
   status: {
     danger: orange[500],
   },
 });
+
+theme.typography.h1= {
+  fontSize: '1.5rem',
+  '@media (min-width:600px)': {
+    fontSize: '3rem',
+  },
+  [theme.breakpoints.up('md')]: {
+    fontSize: '6rem',
+  },
+};
 
 function App() {
   return (

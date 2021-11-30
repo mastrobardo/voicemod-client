@@ -1,22 +1,41 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { soundsApi } from "./main-view.service";
 import { Sound } from "./main-view.types";
-import { Box, Grid, Paper, styled, Theme } from "@mui/material";
-import { makeStyles, withTheme } from "@mui/styles";
-import {MediaCard} from "../Card/Card";
+import { Grid } from "@mui/material";
+import { MediaCard } from "../Card/Card";
+import { NoSound } from "../NoSounds/no-sounds";
+import { SoundDetails } from "../SoundDetails/sound-details";
+import { useAppSelector } from "../../app/hooks";
+// import { selectModalId } from "../SoundDetails/sound-details.slice";
+import { RootState } from "@reduxjs/toolkit/dist/query/core/apiState";
 
 
 export const MainView: React.FC = () => {
     const result = soundsApi.endpoints.getSounds.useQuery();
+    const hasItems = result && result.data?.length;
+    const modalId = useAppSelector((state: any) => state.soundsDetails.modalId);
+
+    useEffect(() => {
+        console.log(modalId)
+    }, [modalId])
+
+    if(!hasItems) {
+        return <NoSound />
+    }
+
     return (
+        <>
+        <SoundDetails id={modalId} open={Boolean(modalId)} />
         <Grid container spacing={3} alignItems="stretch">    
-            {result && result.data?.length && result.data.map((ele:Sound, idx: number) => {
+            {hasItems && result?.data?.map((ele:Sound, idx: number) => {
+                console.log(ele)
                 return (
-                    <Grid item xs={12} sm={6} lg={3}>
+                    <Grid key={ele._id} item xs={12} sm={6} lg={3}>
                         <MediaCard {...ele} />
                     </Grid>
                 )
             })}  
         </Grid>
+        </>
     )
 }
