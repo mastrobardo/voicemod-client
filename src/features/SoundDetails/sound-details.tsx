@@ -1,4 +1,5 @@
 import { Modal, Box, Typography, Button, Card, CardActions, CardContent, CardMedia } from "@mui/material";
+import useSound from "use-sound";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { onPropsChanged } from "../../hooks/react.hooks";
 import { soundsApi } from "../MainView/main-view.service";
@@ -8,7 +9,6 @@ type SoundDetailsModal = {
     id: string;
     open: boolean;
 }
-
 
 const style = {
     position: 'absolute' as 'absolute',
@@ -27,8 +27,14 @@ export const SoundDetails = ({ id, open } :SoundDetailsModal) => {
             skip: Boolean(id) === false
         });
     const dispatch = useAppDispatch();
+    const [play] = useSound('sounds/sound.mp3');
     const onCloseHandler = () => dispatch(unsetModalId());
-    
+    const onClickSoundHandler = () => {
+        if(data) {
+            dispatch(soundsApi.endpoints.updateSound.initiate(data._id));
+            play();
+        }
+    }
     return (
             data ? 
             <Modal
@@ -57,7 +63,7 @@ export const SoundDetails = ({ id, open } :SoundDetailsModal) => {
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    <Button size="small" onClick={() => dispatch(soundsApi.endpoints.updateSound.initiate(data._id))}> listen Sound</Button>
+                    <Button size="small" onClick={() => onClickSoundHandler()}> listen Sound</Button>
                 </CardActions>
                 </Card>
             </Box>
