@@ -7,11 +7,14 @@ export const soundsApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: apiUrl
   }),
+  tagTypes: ['Sounds'],
   reducerPath: 'soundsApi',
   endpoints: (build) => ({
     getSound: build.query<Sound, string>({
       query: (id) => `sounds/${id}`,
+      providesTags: ['Sounds'],
       async onQueryStarted(id, { dispatch, queryFulfilled }) {
+        if(!id) return;
         // `onStart` side-effect
         // dispatch(messageCreated('Fetching post...'))
         try {
@@ -27,6 +30,13 @@ export const soundsApi = createApi({
     getSounds: build.query<SoundsResponse, void>({
         query: () => 'sounds',
       }),
+    updateSound: build.mutation<Sound, string>({
+      query: (id) => ({
+        url: `sounds/${id}/play`,
+        method: 'PUT',
+      }),
+      invalidatesTags: ['Sounds'],
+    }),
   }),
 })
 // export const { useGetSound, useGetSounds } = api;

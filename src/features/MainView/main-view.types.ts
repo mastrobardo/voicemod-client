@@ -2,7 +2,7 @@ export type Sound = {
     _id: string;
     name: string;
     icon: string;
-    playback: string;
+    playbacks: string;
     price: string;
 }
 
