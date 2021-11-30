@@ -23,7 +23,7 @@ export const MainView: React.FC = () => {
     return (
         <Box sx={{ p: 2 }} >
         <SoundDetails id={modalId} open={Boolean(modalId)} />
-        <Grid container spacing={3} alignItems="stretch">    
+        <Grid container spacing={3} alignItems="center" justifyContent="center">    
             {hasItems && result?.data?.map((ele:Sound, idx: number) => {
                 return (
                     <Grid key={ele._id} item xs={12} sm={6} lg={3}>

@@ -11,21 +11,7 @@ import { setModalId } from '../SoundDetails/sound-details.slice';
 import { useTheme } from '@emotion/react';
 import { makeStyles } from '@mui/styles';
 
-const useStyles = makeStyles((theme: any) => ({
-    root: {
-      maxWidth: 345,
-      [theme.breakpoints.down("md")] : {
-      maxWidth: 200 
-      }
-    },
-    media: {
-      height: 140
-    }
-  }));
-
 export const MediaCard: React.FC<Sound> = ({ _id, name, icon }) => {
-  const theme = useTheme();
-  const styles = useStyles(theme);
   const dispatch = useAppDispatch();
   const id = _id;
   const onClickHandler = (id: string) => {
