@@ -8,8 +8,6 @@ import Typography from '@mui/material/Typography';
 import { Sound } from '../MainView/main-view.types';
 import { useAppDispatch } from '../../app/hooks';
 import { setModalId } from '../SoundDetails/sound-details.slice';
-import { useTheme } from '@emotion/react';
-import { makeStyles } from '@mui/styles';
 
 export const MediaCard: React.FC<Sound> = ({ _id, name, icon }) => {
   const dispatch = useAppDispatch();

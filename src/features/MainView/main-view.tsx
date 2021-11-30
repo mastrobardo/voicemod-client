@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { soundsApi } from "./main-view.service";
 import { Sound } from "./main-view.types";
 import { Box, Grid } from "@mui/material";
-import { MediaCard } from "../Card/Card";
+import { MediaCard } from "../Card/card";
 import { NoSound } from "../NoSounds/no-sounds";
 import { SoundDetails } from "../SoundDetails/sound-details";
 import { useAppSelector } from "../../app/hooks";
@@ -11,10 +11,6 @@ export const MainView: React.FC = () => {
     const result = soundsApi.endpoints.getSounds.useQuery();
     const hasItems = result && result.data?.length;
     const modalId = useAppSelector((state: any) => state.soundsDetails.modalId);
-
-    useEffect(() => {
-        console.log(modalId)
-    }, [modalId])
 
     if(!hasItems) {
         return <NoSound />
