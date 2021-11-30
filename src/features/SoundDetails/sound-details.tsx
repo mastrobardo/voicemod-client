@@ -1,7 +1,6 @@
 import { Modal, Box, Typography, Button, Card, CardActions, CardContent, CardMedia } from "@mui/material";
 import useSound from "use-sound";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { onPropsChanged } from "../../hooks/react.hooks";
+import { useAppDispatch } from "../../app/hooks";
 import { soundsApi } from "../MainView/main-view.service";
 import { unsetModalId } from "./sound-details.slice";
 
