@@ -14,12 +14,16 @@ const style = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 400,
+    width: '80%',
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
     p: 4,
   };
+
+const buttonStyle = {
+    fontSize: '2em'
+}
 
 export const SoundDetails = ({ id, open } :SoundDetailsModal) => {
     const { data } = soundsApi.endpoints.getSound.useQuery(id, {
@@ -62,7 +66,7 @@ export const SoundDetails = ({ id, open } :SoundDetailsModal) => {
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    <Button size="small" onClick={() => onClickSoundHandler()}> listen Sound</Button>
+                    <Button size="large" style={buttonStyle} onClick={() => onClickSoundHandler()}> listen Sound</Button>
                 </CardActions>
                 </Card>
             </Box>
