@@ -58,7 +58,7 @@ export const SoundDetails = ({ id, open } :SoundDetailsModal) => {
                     Playbacks: {data.playbacks}
                     </Typography>
                     <Typography gutterBottom variant="h5" component="div">
-                    Price: {data.price}
+                    Price: {data.price}&euro;
                     </Typography>
                 </CardContent>
                 <CardActions>
